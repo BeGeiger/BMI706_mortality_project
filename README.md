@@ -8,4 +8,4 @@ April 2022
 The goal of our project is to gain insights from state- and county-level visualizations of US mortality data.
 The data ranges from 1968 to 2016 and is stratified by state, (county), year, race, gender, age group and ICD code groups.
 
-Please read the `README_data_generation.md` file in `data_generation` for further details on the data.
+Please read the `README_data_generation.md` file in the `data_generation` folder for further details on the data.
