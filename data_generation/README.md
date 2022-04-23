@@ -1,6 +1,6 @@
 # BMI706: Data Visualization Project Mortality Data
-# April 2022
-# Author: Benedikt Geiger
+### April 2022
+### Author: Benedikt Geiger
 
 
 
