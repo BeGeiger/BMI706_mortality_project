@@ -43,7 +43,7 @@ These files will be located in `./mortality/original_files/`
 * Tidy state-level mortality files for the years 1968-1978 (ICD8), 1979-1998 (ICD9) and 1999-2016 (ICD10) and
 a state-level mortality file for 1968-2016 restricted to the White and Black population, all ICD groups that
 did not change between 1968 and 2016 and data points with at least 5 deaths per (state, year, race, gender, age group).
-(The list of these 18 "stable" ICD groups is located in ./dics_and_lists/ICD_all.tsv)
+(The list of these 18 "stable" ICD groups is located in `./dics_and_lists/ICD_all.tsv`)
 The 1968-1978 mortality file contains data points with less than 5 deaths per (state, year, race, gender, age group),
 but the 1979-1998 and 1999-2016 files do not due to privacy changes at 1989.
 These files will be located in `./mortality/state_level/`
