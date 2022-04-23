@@ -1,7 +1,7 @@
 # BMI706: Data Visualization Project Mortality Data
 ---
-April 2022 <br>
-Authors: Benedikt Geiger, Mirja Mittermaier, Fiona Song, Lantian Xu
+Authors: Benedikt Geiger, Mirja Mittermaier, Fiona Song, Lantian Xu <br>
+April 2022
 ---
 
 
