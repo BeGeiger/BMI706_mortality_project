@@ -1,6 +1,8 @@
 # BMI706: Data Visualization Project Mortality Data
-### April 2022
-### Author: Benedikt Geiger
+---
+April 2022
+Author: Benedikt Geiger
+---
 
 
 
@@ -44,6 +46,6 @@ but the 1979-1998 and 1999-2016 files do not due to privacy changes at 1989.
 These files will be located in `./mortality/state_level/`
 	
 * Tidy county-level mortality files for the years 1968-1978 (ICD8) and 1979-1988 (ICD9)
-######################
-# UNDER CONSTRUCTION #
-######################
+---
+# UNDER CONSTRUCTION
+---
