@@ -5,7 +5,7 @@ April 2022
 ---
 
 The original mortality and population data was obtained by querying [CDC WONDER](https://wonder.cdc.gov/mortSQL.html)
-and accessing the [publically available](https://www.cdc.gov/nchs/data_access/cmf.htm) compressed population and mortality files for the years 1968-1988.
+and accessing the [publicly available](https://www.cdc.gov/nchs/data_access/cmf.htm) compressed population and mortality files for the years 1968-1988.
 For details on the original data, please check out [the CDC webpage](https://www.cdc.gov/nchs/data_access/cmf.htm).
 
 
