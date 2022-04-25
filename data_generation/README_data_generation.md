@@ -27,7 +27,7 @@ These files will be located in `./population/original_files/`
 * Tidy state-level population files for the years 1968-1978 (ICD8), 1979-1998 (ICD9) and 1999-2016 (ICD10) and
 a state-level population file for 1968-2016 restricted to the White and Black population. Notice that only death
 counts for White and Black people can be compared across the entire time due to a change of race classification
-at 1999.
+in 1999.
 These files will be located in `./population/state_level/`
 	
 * Tidy county-level population files for the years 1968-1978 (ICD8) and 1979-1988 (ICD9) in long and wide format
