@@ -47,7 +47,8 @@ a state-level mortality file for 1968-2016 restricted to the White and Black pop
 did not change between 1968 and 2016 and data points with at least 5 deaths per (state, year, race, gender, age group).
 The list of these 18 "stable" ICD groups is located in `./dics_and_lists/ICD_all.tsv`.
 The 1968-1978 mortality file contains data points with less than 5 deaths per (state, year, race, gender, age group),
-but the 1979-1998 and 1999-2016 files do not due to privacy changes at 1989.
+but the 1979-1998 and 1999-2016 files do not due to privacy changes at 1989. Mortality rates computed with less than
+10 deaths per (state, year, race, gender, age group) are flagged as unreliable.
 These files will be located in `./mortality/state_level/`
 	
 * Tidy county-level mortality files for the years 1968-1978 (ICD8) and 1979-1988 (ICD9). Mortality rates computed with less than
