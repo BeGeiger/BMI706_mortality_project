@@ -75,7 +75,7 @@ def generate_pop_files_county(county_files):
 		 ["Age Group", "Population"]
 	)
 	
-	rf.cp_files(county_files, [county_tables + "long_" + cf for cf in cf_names])
+	rf.cp_files(county_files, [county_tables + "long_" + cf[:-4] + ".tsv" for cf in cf_names])
 	
 	for pf in county_files:
 		

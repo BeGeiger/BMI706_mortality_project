@@ -52,3 +52,7 @@ do
 	echo Executing "$file"
 	python3 "$file"
 done
+
+
+echo Computing mortality rates
+python3 compute_mortality_rates.py
