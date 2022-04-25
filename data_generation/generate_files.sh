@@ -7,6 +7,7 @@
 # This bash script downloads the county level population and mortality files for 1968-1988 
 # and formats all population and mortality files for the years 1968-2016
 
+pip install in_place
 
 # Unzip state level CDC WONDER data; downlaod and add compressed population files for 1968-1988
 unzip ./population/original_files.zip
