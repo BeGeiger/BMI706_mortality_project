@@ -74,8 +74,13 @@ def generate_mort_files_state(state_files, icd, smf=None):
 	
 		rf.delete_rows_files(state_files, 4*["Deaths"], [1,2,3,4])
 
-
-	rf.add_column_files(state_files, ["Year"], [1], [int(y) for y in years])
+	state_encode_dict = rf.read_dict("state_code.tsv")
+	encode_info = {
+		"State": (["State Code"], [state_encode_dict])
+	}
+	rf.decode_col_files(state_files, encode_info, delete_old=False)
+	
+	rf.add_column_files(state_files, ["Year"], [2], [int(y) for y in years])
 	rf.merge_files(state_files, "./mortality/state_level/" + "Mort" + str(file_years[0]) + str(file_years[-1]) + ".tsv")
 	
 	for mf in state_files:
@@ -138,6 +143,13 @@ def generate_mort_file_county(county_file, icd):
 		"ICD Group Encoded": (["ICD Group"], [icd_dict_groups])
 	}
 	rf.decode_col_inplace(county_file, decode_info)
+	rf.delete_sign_file(county_file, " County")
+	
+	state_encode_dict = rf.read_dict("state_code.tsv")
+	encode_info = {
+		"State": (["State Code"], [state_encode_dict])
+	}
+	rf.decode_col_inplace(county_file, encode_info, delete_old=False)
 	
 	rf.cp_files([county_file], ["./mortality/county_level/" + cf_name[:-4] + ".tsv"])
 	

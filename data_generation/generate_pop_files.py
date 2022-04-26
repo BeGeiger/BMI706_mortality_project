@@ -19,6 +19,12 @@ def generate_pop_files_state(state_files):
 	}
 	rf.decode_col_files(state_files, decode_info)
 	
+	state_encode_dict = rf.read_dict("state_code.tsv")
+	encode_info = {
+		"State": (["State Code"], [state_encode_dict])
+	}
+	rf.decode_col_files(state_files, encode_info, delete_old=False)
+	
 	state_tables = "./population/state_level/"
 	os.mkdir(state_tables)
 	
@@ -62,6 +68,14 @@ def generate_pop_files_county(county_files):
 	rf.decode_col_files(county_files, decode_info)
 	
 	rf.delete_rows_files(county_files, ["State"], ["NA"])
+	
+	rf.delete_sign_files(county_files, " County")
+	
+	state_encode_dict = rf.read_dict("state_code.tsv")
+	encode_info = {
+		"State": (["State Code"], [state_encode_dict])
+	}
+	rf.decode_col_files(county_files, encode_info, delete_old=False)
 	
 	county_tables = "./population/county_level/"
 	os.mkdir(county_tables)
