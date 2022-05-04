@@ -10,13 +10,13 @@ The data ranges from 1968 to 2016 and is stratified by state, (county), year, ra
 
 Please read the `README_data_generation.md` file in the `data_generation` folder for further details on the data.
 
-Our visualizations use large files with mortality information on a county level. Before running the `project_app.py` via
+Our visualizations use large files with mortality information on a county level. <strong>Before</strong> running the `project_app.py` via
 
 ```bash
 streamlit run project_app.py
 ```
 
-it is necessary to run the `generate_files.sh` script located in the `data_generation` folder to automatically download and generate
+<strong>it is necessary</strong> to run the `generate_files.sh` script located in the `data_generation` folder to automatically download and generate
 the required files. Running the script takes approximately 5-10 minutes.
 
 Regarding our visualiuations, we used Altair and Streamlit to solve the following tasks:
