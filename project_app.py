@@ -9,7 +9,6 @@ from vega_datasets import data
 
 
 path_mort_state = 'data_generation/mortality/state_level/'
-path_mort_county = 'data_generation/mortality/county_level/'
 
 ## read in data ##
 @st.cache
@@ -27,14 +26,6 @@ def load_state9916():
 @st.cache
 def load_state6816():
 	return pd.read_csv(path_mort_state + 'Mort6816.tsv', sep='\t', low_memory=False)
-
-@st.cache
-def load_county6878():
-	return pd.read_csv(path_mort_county + 'Mort6878_county.tsv', sep='\t')
-
-@st.cache
-def load_county7988():
-	return pd.read_csv(path_mort_county + 'Mort7988_county.tsv', sep='\t')
 
 @st.cache
 def load_pop6816():
@@ -62,13 +53,7 @@ state6878 = load_state6878()
 state7998 = load_state7998()
 state9916 = load_state9916()
 state6816 = load_state6816()
-county6878 = load_county6878()
-county7988 = load_county7988()
 state_pop = load_pop6816()
-empty_county = pd.DataFrame({
-		'State' : [], 'State Code': [], 'County': [], 'Year': [], 'Race': [], 'Gender': [], 'Age Group': [],
-		'ICD Group': [], 'Deaths': [], 'Mortality Rate': [], 'Reliable MR?': []
-})
 
 year_min = 1968
 year_max = 2016
@@ -81,24 +66,20 @@ age_order = [
 
 
 
-## US STATE AND COUNTY MORTALITY RATES ##
-st.header("US State and County Mortality Rates")
+## US STATE MORTALITY RATES ##
+st.header("US State Mortality Rates")
 
 year3 = st.slider('Year', min_value=year_min, max_value=year_max, step=1, key="year3")
 
 # year selection determines data
 if year3 <= 1978:
 	dat_state = state6878
-	dat_county = county6878
 elif year3 > 1978 and year3 <= 1988:
 	dat_state = state7998
-	dat_county = county7988
 elif year3 > 1988 and year3 <= 1998:
 	dat_state = state7998
-	dat_county = empty_county
 else:
 	dat_state = state9916
-	dat_county = empty_county
 
 #selections
 gender3 = st.radio("Sex", tuple(dat_state["Gender"].unique()), key="gender3")
@@ -113,7 +94,6 @@ age3 = st.selectbox(
 selected = alt.selection_single()
 
 state_subset = prep_data3(dat_state, year3, race3, gender3, age3, ICD3)
-county_subset = prep_data3(dat_county, year3, race3, gender3, age3, ICD3)
 
 
 # STATE MORTALITY RATES
@@ -160,76 +140,6 @@ if len(state_subset):
 	st.altair_chart(background_us+state_rate, use_container_width=True)
 else:
 	st.info("No state-level data avaiable for the given subset.")	
-
-
-# COUNTY LEVEL MORTALITY DATA
-ansi = pd.read_csv('https://www2.census.gov/geo/docs/reference/state.txt', sep='|')
-ansi.columns = ['id', 'abbr', 'State', 'statens']
-ansi = ansi[['id', 'State', 'abbr']]
-mapping_id = dict(ansi[['State', 'id']].values)
-mapping_abbr = dict(ansi[['State', 'abbr']].values)
-
-if year3 <= 1988:
-	state3 = st.selectbox(
-		'State', sorted(list(set(state_subset["State"].unique()) - {"District of Columbia", "Louisiana"})), 
-		key="state3"
-	)
-else:
-	# default to avoid long if-else code
-	state3 = "Washington"
-
-county_subset = county_subset[county_subset['State'] == state3]
-state_code = str(mapping_id[state3]).zfill(2)
-state_abbr = mapping_abbr[state3]
-state_slash = state3.lower().replace(" ", "-")
-state_underscore = state3.lower().replace(" ", "_")
-url_state = 'https://raw.githubusercontent.com/deldersveld/topojson/master/countries/us-states/'+ state_abbr+'-'+state_code+'-'+state_slash+'-counties.json'
-
-source_state = alt.topo_feature(url_state, 'cb_2015_'+state_underscore+'_county_20m')
-
-selected_county = alt.selection_single()
-rate_scale3_county = alt.Scale(
-	domain=[county_subset['Mortality Rate'].min(), county_subset['Mortality Rate'].max()], 
-	scheme="bluepurple"
-)
-rate_color3_county = alt.Color(
-	field="Mortality Rate",
-	type="quantitative",
-	scale=rate_scale3_county
-)
-
-# background state
-background_state = alt.Chart(source_state).mark_geoshape(
-	fill='lightgray',
-	stroke='white'
-).properties(
-	width=700,
-	height=420
-).project('albersUsa')
-
-# county rates
-county_rate = alt.Chart(source_state).mark_geoshape().encode(
-	tooltip=["Mortality Rate:Q", "County:N"],
-	color=rate_color3_county
-).transform_lookup(
-	lookup='properties.NAME',
-	from_= alt.LookupData(county_subset, 'County', ["Mortality Rate", 'County']),
-).properties(
-	width=700,
-	height=420
-).project(
-	'albersUsa'
-).add_selection(
-	selected
-).transform_filter(
-	selected
-)
-
-if year3 <= 1988:
-	st.altair_chart(background_state+county_rate, use_container_width=True)
-else:
-	st.info("County-level data is only available for the years 1968-1988.")
-
 
 
 ## MORTALITY TRENDS OF DIFFERENT ICD CODES ##
