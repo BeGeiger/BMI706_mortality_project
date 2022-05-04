@@ -20,9 +20,7 @@ streamlit run project_app.py
 the required files. Running the script takes approximately 5-10 minutes.
 
 Regarding our visualiuations, we used Altair and Streamlit to solve the following tasks:
-* Identify difference in US state and county mortality rates
+* Identify differences in US state and county mortality rates
 * Reveal mortality rate trends for different ICD groups
 * Detect gender, race and age group mortality differences
 * Display population growth per state, race and age group
-
-
